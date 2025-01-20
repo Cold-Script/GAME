@@ -215,7 +215,7 @@ local args = {
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
 end})
 
-
+Tabs.Other:AddSection("Players")
 Tabs.Other:AddSlider("WalkSpeed", {
         Title = "WalkSpeed",
         Default = 30,
@@ -223,19 +223,21 @@ Tabs.Other:AddSlider("WalkSpeed", {
         Max = 100,
         Rounding = 2,
         Callback = function(v)
+        getgenv().WalkSpeed = v
         game:GetService("RunService").RenderStepped:Connect(function()
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = getgenv().WalkSpeed
         end)
 end})
 Tabs.Other:AddSlider("HipHeight", {
         Title = "HipHeight",
-        Default = 2.5,
-        Min = 2.5,
+        Default = 2.25,
+        Min = 2.25,
         Max = 50,
         Rounding = 2,
         Callback = function(v)
+        getgenv().HipHeight = v
         game:GetService("RunService").RenderStepped:Connect(function()
-        game.Players.LocalPlayer.Character.Humanoid.HipHeight = v
+        game.Players.LocalPlayer.Character.Humanoid.HipHeight = getgenv().HipHeight
         end)
 end})
 Tabs.Other:AddSlider("HipHeight", {
@@ -245,8 +247,9 @@ Tabs.Other:AddSlider("HipHeight", {
         Max = 150,
         Rounding = 2,
         Callback = function(v)
+        getgenv().JumpPower = v
         game:GetService("RunService").RenderStepped:Connect(function()
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = getgenv().JumpPower
         end)
 end})
 Tabs.Other:AddButton({
@@ -254,8 +257,56 @@ Tabs.Other:AddButton({
         Callback = function()
 game.Players.LocalPlayer.Character.Humanoid.Health = 0
 end})
-
-
-
+Tabs.Other:AddSection("Camera")
+Tabs.Other:AddSlider("FOV", {
+        Title = "Field Of View",
+        Default = 70,
+        Min = 70,
+        Max = 120,
+        Rounding = 2,
+        Callback = function(v)
+        getgenv().FOV = v
+        game:GetService("RunService").RenderStepped:Connect(function()
+        workspace.CurrentCamera.FieldOfView = getgenv().FOV
+        end)
+end})
+Tabs.Other:AddSection("Lighting")
+Tabs.Other:AddSlider("Brightness", {
+        Title = "Brightness",
+        Default = 1,
+        Min = 1,
+        Max = 3,
+        Rounding = 2,
+        Callback = function(v)
+        getgenv().Brightness = v
+end})
+Tabs.Other:AddToggle("Fullbright", {
+Title = "Fullbright", 
+Default = false,
+Callback = function(v)
+getgenv().Fullbright = v
+game:GetService("RunService").RenderStepped:Connect(function()
+if getgenv().Fullbright then
+game.Lighting.OutdoorAmbient = Color3.new(1,1,1)
+game.Lighting.Brightness = getgenv().Brightness or 1
+game.Lighting.GlobalShadows = false
+else
+game.Lighting.OutdoorAmbient = Color3.new(0,0,0)
+game.Lighting.Brightness = 0
+game.Lighting.GlobalShadows = true
+end
+end)
+end})
+Tabs.Other:AddToggle("AutoDay", {
+Title = "Auto Day", 
+Default = false,
+Callback = function(v)
+getgenv().AutoDay = v
+game:GetService("RunService").RenderStepped:Connect(function()
+if getgenv().AutoDay then
+game.Lighting.ClockTime = 12
+end
+end)
+end})
 
 
