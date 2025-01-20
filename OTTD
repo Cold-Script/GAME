@@ -348,7 +348,7 @@ game.Lighting.OutdoorAmbient = Color3.new(1,1,1)
 game.Lighting.Brightness = getgenv().Brightness or 1
 game.Lighting.GlobalShadows = false
 else
-game.Lighting.OutdoorAmbient = Color3.new(50,50,50)
+game.Lighting.OutdoorAmbient = Color3.fromRGB(50,50,50)
 game.Lighting.Brightness = 1
 game.Lighting.GlobalShadows = true
 end
