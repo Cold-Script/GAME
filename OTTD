@@ -1,0 +1,47 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "YOUHUB | [UPDATE] Old Toilet Tower Defense",
+    SubTitle = "v0.5",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+local Tabs = {
+    Common = Window:AddTab({ Title = "Common", Icon = "settings" }),
+    Uncommon = Window:AddTab({ Title = "Uncommon", Icon = "settings" }),
+    Rare = Window:AddTab({ Title = "Rare", Icon = "settings" }),
+    Epic = Window:AddTab({ Title = "Epic", Icon = "settings" }),
+    Legendary = Window:AddTab({ Title = "Legendary", Icon = "settings" }),
+    Mythical = Window:AddTab({ Title = "Mythical", Icon = "settings" }),
+    Exclusive = Window:AddTab({ Title = "Exclusive", Icon = "settings" }),
+    Others = Window:AddTab({ Title = "Other", Icon = "settings" })
+}
+
+Tabs.Common:AddDropdown("Common", {
+        Title = "Select Unit",
+        Values = {"Camerawoman"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitCommon = v
+end})
+Tabs.Main:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+local args = {
+    [1] = getgenv().UnitCommon,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end})
+
+
+
+
+
