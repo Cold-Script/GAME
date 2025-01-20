@@ -20,7 +20,7 @@ local Tabs = {
     Mythical = Window:AddTab({ Title = "Mythical", Icon = "settings" }),
     Exclusive = Window:AddTab({ Title = "Exclusive", Icon = "settings" }),
     Event = Window:AddTab({ Title = "Event", Icon = "settings" }),
-    Others = Window:AddTab({ Title = "Other", Icon = "settings" })
+    Other = Window:AddTab({ Title = "Other", Icon = "settings" })
 }
 
 Tabs.Common:AddDropdown("Common", {
@@ -98,7 +98,6 @@ local args = {
     [1] = getgenv().UnitEpic,
     [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
 }
-
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
 end})
 
@@ -118,16 +117,7 @@ local args = {
     [1] = getgenv().UnitLegend,
     [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
 }
-
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
-function HitboxLegendary()
-workspace.Tower["Titan TV Man"].HumanoidRootPart.CanCollide = true
-workspace.Tower["Titan Speakerman"].HumanoidRootPart.CanCollide = true
-wait(0.5)
-workspace.Tower["Titan TV Man"].HumanoidRootPart.CanCollide = false
-workspace.Tower["Titan Speakerman"].HumanoidRootPart.CanCollide = false
-end
-HitboxLegendary()
 end})
 
 
@@ -147,14 +137,6 @@ local args = {
     [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
-function HitboxMythic()
-workspace.Tower["Titan Cinemaman"].HumanoidRootPart.CanCollide = true
-workspace.Tower["Upgraded Titan Speakerman"].HumanoidRootPart.CanCollide = true
-wait(0.5)
-workspace.Tower["Titan Cinemaman"].HumanoidRootPart.CanCollide = false
-workspace.Tower["Upgraded Titan Speakerman"].HumanoidRootPart.CanCollide = false
-end
-HitboxMythic()
 end})
 
 
@@ -169,13 +151,11 @@ end})
 Tabs.Exclusive:AddButton({
         Title = "Summon Unit",
         Callback = function()
-if not getgenv().UnitExclus == "Green Laser Cameraman" then
 local args = {
     [1] = getgenv().UnitExclus,
     [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
-end
 if getgenv().UnitExclus == "Green Laser Cameraman" then
 local args = {
     [1] = "Green Laser CameraMan",
@@ -185,7 +165,7 @@ game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("Cha
 end
 end})
 
-Tabs.Event:AddSection({"🎆 New Year 2025 🎆"})
+Tabs.Event:AddSection("🎆 New Year 2025 🎆")
 Tabs.Event:AddDropdown("EventNewYear2025", {
         Title = "Select Unit",
         Values = {"Elf Cameraman","Titan Present Woman"},
@@ -197,16 +177,14 @@ end})
 Tabs.Event:AddButton({
         Title = "Summon Unit",
         Callback = function()
-if not getgenv().UnitNewYear2025 == "Titan Present Woman" then
 local args = {
     [1] = getgenv().UnitNewYear2025,
     [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
-end
 if getgenv().UnitNewYear2025 == "Titan Present Woman" then
 local args = {
-    [1] = "Titan Presentwoman,
+    [1] = "Titan Presentwoman",
     [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
@@ -218,7 +196,7 @@ end
 HitboxEventNewYear2025()
 end
 end})
-Tabs.Event:AddSection({"❄️ Chirstmas 2025 ❄️"})
+Tabs.Event:AddSection("❄️ Chirstmas 2025 ❄️")
 Tabs.Event:AddDropdown("EventChirstmas2025", {
         Title = "Select Unit",
         Values = {"Santa TV Woman"},
@@ -238,6 +216,44 @@ game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("Cha
 end})
 
 
+Tabs.Other:AddSlider("WalkSpeed", {
+        Title = "WalkSpeed",
+        Default = 30,
+        Min = 30,
+        Max = 100,
+        Rounding = 2,
+        Callback = function(v)
+        game:GetService("RunService").RenderStepped:Connect(function()
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+        end)
+end})
+Tabs.Other:AddSlider("HipHeight", {
+        Title = "HipHeight",
+        Default = 2.5,
+        Min = 2.5,
+        Max = 50,
+        Rounding = 2,
+        Callback = function(v)
+        game:GetService("RunService").RenderStepped:Connect(function()
+        game.Players.LocalPlayer.Character.Humanoid.HipHeight = v
+        end)
+end})
+Tabs.Other:AddSlider("HipHeight", {
+        Title = "JumpPower",
+        Default = 50,
+        Min = 50,
+        Max = 150,
+        Rounding = 2,
+        Callback = function(v)
+        game:GetService("RunService").RenderStepped:Connect(function()
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+        end)
+end})
+Tabs.Other:AddButton({
+        Title = "Reset Character",
+        Callback = function()
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+end})
 
 
 
