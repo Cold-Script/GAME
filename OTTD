@@ -19,18 +19,19 @@ local Tabs = {
     Legendary = Window:AddTab({ Title = "Legendary", Icon = "settings" }),
     Mythical = Window:AddTab({ Title = "Mythical", Icon = "settings" }),
     Exclusive = Window:AddTab({ Title = "Exclusive", Icon = "settings" }),
+    Event = Window:AddTab({ Title = "Event", Icon = "settings" }),
     Others = Window:AddTab({ Title = "Other", Icon = "settings" })
 }
 
 Tabs.Common:AddDropdown("Common", {
         Title = "Select Unit",
-        Values = {"Camerawoman"},
+        Values = {"Camerawoman","Speakerman"},
         Multi = false,
         Default = "",
         Callback = function(v)
 getgenv().UnitCommon = v
 end})
-Tabs.Main:AddButton({
+Tabs.Common:AddButton({
         Title = "Summon Unit",
         Callback = function()
 local args = {
@@ -40,6 +41,203 @@ local args = {
 
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
 end})
+
+
+Tabs.Uncommon:AddDropdown("Uncommon", {
+        Title = "Select Unit",
+        Values = {"Cameraman","Car Speakerman"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitUncommon = v
+end})
+Tabs.Uncommon:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+local args = {
+    [1] = getgenv().UnitUncommon,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end})
+
+
+Tabs.Rare:AddDropdown("Rare", {
+        Title = "Select Unit",
+        Values = {"TV Man","Speaker Helicopter"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitRare = v
+end})
+Tabs.Rare:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+local args = {
+    [1] = getgenv().UnitRare,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end})
+
+
+Tabs.Epic:AddDropdown("Epic", {
+        Title = "Select Unit",
+        Values = {"Camera Helicopter","Large Cameraman","Large TV Man","Surveillance Camerawoman"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitEpic = v
+end})
+Tabs.Epic:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+local args = {
+    [1] = getgenv().UnitEpic,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end})
+
+
+Tabs.Legendary:AddDropdown("Legendary", {
+        Title = "Select Unit",
+        Values = {"Laser Cameraman Car","Jetpack Speakerman","Mech Cameraman","Dark Speakerman","Dacing Speakerwoman","Secret Agent","Titan Speakerman","Titan TV Man","Ninja Cameraman"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitLegend = v
+end})
+Tabs.Legendary:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+local args = {
+    [1] = getgenv().UnitLegend,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+function HitboxLegendary()
+workspace.Tower["Titan TV Man"].HumanoidRootPart.CanCollide = true
+workspace.Tower["Titan Speakerman"].HumanoidRootPart.CanCollide = true
+wait(0.5)
+workspace.Tower["Titan TV Man"].HumanoidRootPart.CanCollide = false
+workspace.Tower["Titan Speakerman"].HumanoidRootPart.CanCollide = false
+end
+HitboxLegendary()
+end})
+
+
+Tabs.Mythical:AddDropdown("Mythic", {
+        Title = "Select Unit",
+        Values = {"Glitch Plunger Man","Titan Cinemaman","Upgraded Titan Speakerman","Upgraded Titan Cameraman"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitMythic = v
+end})
+Tabs.Mythical:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+local args = {
+    [1] = getgenv().UnitMythic,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+function HitboxMythic()
+workspace.Tower["Titan Cinemaman"].HumanoidRootPart.CanCollide = true
+workspace.Tower["Upgraded Titan Speakerman"].HumanoidRootPart.CanCollide = true
+wait(0.5)
+workspace.Tower["Titan Cinemaman"].HumanoidRootPart.CanCollide = false
+workspace.Tower["Upgraded Titan Speakerman"].HumanoidRootPart.CanCollide = false
+end
+HitboxMythic()
+end})
+
+
+Tabs.Exclusive:AddDropdown("Exclusive", {
+        Title = "Select Unit",
+        Values = {"Scientist Cameraman","Large Scientist Cameraman","Engineer Cameraman","Jetpack Cameraman","Mace Cameraman","TV Woman","Green Laser Cameraman","Shield Cameraman","Titan Cameraman"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitExclus = v
+end})
+Tabs.Exclusive:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+if not getgenv().UnitExclus == "Green Laser Cameraman" then
+local args = {
+    [1] = getgenv().UnitExclus,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
+if getgenv().UnitExclus == "Green Laser Cameraman" then
+local args = {
+    [1] = "Green Laser CameraMan",
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
+end})
+
+Tabs.Event:AddSection({"🎆 New Year 2025 🎆"})
+Tabs.Event:AddDropdown("EventNewYear2025", {
+        Title = "Select Unit",
+        Values = {"Elf Cameraman","Titan Present Woman"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitNewYear2025 = v
+end})
+Tabs.Event:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+if not getgenv().UnitNewYear2025 == "Titan Present Woman" then
+local args = {
+    [1] = getgenv().UnitNewYear2025,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
+if getgenv().UnitNewYear2025 == "Titan Present Woman" then
+local args = {
+    [1] = "Titan Presentwoman,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+function HitboxEventNewYear2025()
+workspace.Tower["Titan Presentwoman"].HumanoidRootPart.CanCollide = true
+wait(0.5)
+workspace.Tower["Titan Presentwoman"].HumanoidRootPart.CanCollide = false
+end
+HitboxEventNewYear2025()
+end
+end})
+Tabs.Event:AddSection({"❄️ Chirstmas 2025 ❄️"})
+Tabs.Event:AddDropdown("EventChirstmas2025", {
+        Title = "Select Unit",
+        Values = {"Santa TV Woman"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitChirstmas2025 = v
+end})
+Tabs.Event:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+local args = {
+    [1] = getgenv().UnitChirstmas2025,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end})
+
+
 
 
 
