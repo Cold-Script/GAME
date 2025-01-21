@@ -71,8 +71,7 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "settings" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
-}
+ }
 Tabs.Main:AddSection("🌾 Farm 🌾")
 Tabs.Main:AddToggle("AAFK",{
         Title = "Auto AFK",	
