@@ -83,7 +83,7 @@ Tabs.Main:AddToggle("AT",{
         Title = "Auto Ticket",	
 	Callback = function(v)
 _G.AutoTickets = v
-if value then
+if v then
 local part = Instance.new("Part", workspace)
 			part.Anchored = true
 			part.CFrame = CFrame.new(100, 996, 100)
@@ -122,6 +122,7 @@ workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):SetAttribute(
 else
 if workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):GetAttribute('Downed') then
 workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):SetAttribute('Downed', true)
+end
 end
 end
 end)
