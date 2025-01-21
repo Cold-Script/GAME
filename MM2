@@ -55,13 +55,13 @@ local L_17_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-s
 local L_18_ = L_15_.Options
 L_16_:SetLibrary(L_15_)
 
-   premium = true
+   
 
 local L_19_ = L_15_:CreateWindow({
 	Title = "YOUHUB | MM2",
 	SubTitle = "v0.5",
 	TabWidth = 160,
-	Size = UDim2.fromOffset(1000, 750),
+	Size = UDim2.fromOffset(550, 330),
 	Acrylic = true,
 	Theme = "Dark",
 })
@@ -87,10 +87,6 @@ local L_20_ = {
 		Title = "Emotes",
 		Icon = "rbxassetid://4335480896"
 	}),
-	Premium = premium == "premium" and L_19_:AddTab({
-		Title = "Premium",
-		Icon = "rbxassetid://10709819149"
-	}),
 	Server = L_19_:AddTab({
 		Title = "Server",
 		Icon = "rbxassetid://10734949856"
@@ -101,82 +97,7 @@ local L_20_ = {
 	}),
 }
 
-local L_21_ = L_20_.Main:AddToggle("AutoFarm", {
-	Title = "Auto Farm",
-	Default = false,
-	Callback = function(L_53_arg1)
-		if L_53_arg1 then 
-			repeat
-				local L_54_, L_55_ = pcall(function() 
 
-					task.wait()
-					local L_56_ = L_14_func()
-					if L_56_ then
-
-						local function L_57_func(L_58_arg1)
-							local L_59_ = game.Players.LocalPlayer
-							local L_60_ = L_59_.Character
-							local L_61_ = L_60_ and L_60_:FindFirstChild("HumanoidRootPart")
-
-							if L_61_ then
-
-								local L_62_ = (L_61_.Position - L_58_arg1.p).Magnitude
-								local L_63_ = TweenInfo.new(L_62_ / 70, Enum.EasingStyle.Linear, Enum.EasingDirection.In)
-
-								local L_64_ = game:GetService("TweenService"):Create(L_61_, L_63_, {
-									CFrame = L_58_arg1
-								})
-								L_64_:Play()
-								L_64_.Completed:Wait()
-
-							end
-						end
-
-						if L_56_ and game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.Timer.Visible == true or game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.CashBag.Visible == true then 
-
-							local L_65_ = math.huge
-							local L_66_ = nil
-
-							local L_67_ = game.Players.LocalPlayer
-							local L_68_ = L_67_.Character
-							local L_69_ = L_68_ and L_68_:FindFirstChild("HumanoidRootPart")
-
-							local L_70_ = L_69_.Position
-
-							for L_71_forvar1, L_72_forvar2 in pairs(L_56_:GetChildren()) do
-								if L_72_forvar2.Name == 'Coin_Server' then
-									local L_73_ = L_72_forvar2.Coin.Position
-									local L_74_ = (L_70_ - L_73_).Magnitude
-
-									if L_74_ < L_65_ then
-										L_65_ = L_74_
-										L_66_ = L_72_forvar2
-									end
-								end
-							end
-
-							if L_66_ and not L_13_ then
-								L_57_func(CFrame.new(L_66_.Coin.CFrame.p))
-
-								for L_75_forvar1 = 0, 10, 1 do
-									L_68_:SetPrimaryPartCFrame(L_68_.PrimaryPart.CFrame * CFrame.Angles(0, math.rad(L_75_forvar1), 0))
-									wait(0.02)
-								end
-
-								L_66_.Name = 'False_Coin'
-
-								repeat
-									wait()
-								until L_66_.Name ~= 'Coin_Server'
-								wait(1)
-							end
-						end
-					end
-				end)
-			until not L_18_.AutoFarm.Value or not L_8_.Connected
-		end
-	end
-})
 
 local L_22_ = L_20_.Main:AddToggle("CoinChams", {
 	Title = "Coin Chams",
@@ -184,7 +105,7 @@ local L_22_ = L_20_.Main:AddToggle("CoinChams", {
 	Callback = function(L_76_arg1)
 		if L_76_arg1 then 
 			repeat
-				task.wait()
+				task.wait(1)
 				local L_77_ = L_14_func()
 				if L_77_ then
 					for L_78_forvar1, L_79_forvar2 in pairs(L_77_:GetChildren()) do
@@ -216,7 +137,7 @@ local L_23_ = L_20_.Main:AddToggle("PlayerESP", {
 })  
 --WaitForChild
 spawn(function()
-	while wait() do
+	while wait(1) do
 		if not L_8_.Connected then 
 			for L_84_forvar1, L_85_forvar2 in next, game:GetService('Players'):GetPlayers() do
 				if L_85_forvar2.Name ~= game:GetService('Players').LocalPlayer.Name then
@@ -260,19 +181,19 @@ spawn(function()
 							local L_95_ = L_89_[L_93_forvar2.Name]
 							if L_95_ then
 								if L_95_.Role == "Murderer" then
-									L_94_.FillColor = Color3.fromRGB(225, 0, 0)
+									L_94_.OutlineColor = Color3.fromRGB(225, 0, 0)
 								elseif L_95_.Role == 'Sheriff' then
-									L_94_.FillColor = Color3.fromRGB(0, 0, 225)
+									L_94_.OutlineColor = Color3.fromRGB(0, 0, 225)
 								elseif L_95_.Role == 'Hero' then
-									L_94_.FillColor = Color3.fromRGB(0, 0, 225)
+									L_94_.OutlineColor = Color3.fromRGB(0, 0, 225)
 								else
-									L_94_.FillColor = Color3.fromRGB(76, 215, 134)
+									L_94_.OutlineColor = Color3.fromRGB(76, 215, 134)
 								end
 							else
-								L_94_.FillColor = Color3.fromRGB(76, 215, 134)
+								L_94_.OutlineColor = Color3.fromRGB(76, 215, 134)
 							end
 						else
-							L_94_.FillColor = Color3.fromRGB(255, 255, 255)
+							L_94_.OutlineColor = Color3.fromRGB(255, 255, 255)
 						end
 					end
 				end
@@ -769,54 +690,6 @@ local L_41_ = L_20_.Player:AddToggle("InfiniteJump", {
 	end 
 })
 
-L_20_.Emotes:AddButton({
-	Title = "Ninja",
-	Callback = function()
-		module:emote("ninja")
-	end
-})
-
-L_20_.Emotes:AddButton({
-	Title = "Dab",
-	Callback = function()
-		module:emote("dab")
-	end
-})
-
-L_20_.Emotes:AddButton({
-	Title = "Floss",
-	Callback = function()
-		module:emote("floss")
-	end
-})
-
-L_20_.Emotes:AddButton({
-	Title = "Headless",
-	Callback = function()
-		module:emote("headless")
-	end
-})
-
-L_20_.Emotes:AddButton({
-	Title = "Zen",
-	Callback = function()
-		module:emote("zen")
-	end
-})
-
-L_20_.Emotes:AddButton({
-	Title = "Zombie",
-	Callback = function()
-		module:emote("zombie")
-	end
-}) 
-
-L_20_.Emotes:AddButton({
-	Title = "Sit",
-	Callback = function()
-		module:emote("sit")
-	end
-})
 
 local L_42_ = L_20_.Settings:AddToggle("Settings", {
 	Title = "Save Settings",
