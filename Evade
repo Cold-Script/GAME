@@ -1,0 +1,156 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "ScreenGui"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+local Toggle0 = Instance.new("Frame")
+Toggle0.Name = "Toggle0"
+Toggle0.Parent = ScreenGui
+Toggle0.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Toggle0.BackgroundTransparency = 0.75
+Toggle0.Position = UDim2.new(0.175, 0, -0.075, 0)
+Toggle0.Size = UDim2.new(0, 85, 0, 85)
+
+local Toggle1_5 = Instance.new("Frame")
+Toggle1_5.Name = "Toggle"
+Toggle1_5.Parent = Toggle0
+Toggle1_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Toggle1_5.BackgroundTransparency = 0.75
+Toggle1_5.Position = UDim2.new(0,0,0,0)
+Toggle1_5.Size = UDim2.new(0, 85, 0, 85)
+
+local Toggle = Instance.new("TextButton")
+Toggle.Name = "Toggle"
+Toggle.Parent = Toggle0
+Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Toggle.BackgroundTransparency = 0.75
+Toggle.Position = UDim2.new(0, 0, 0, 0)
+Toggle.Size = UDim2.new(0, 85, 0, 85)
+Toggle.Font = Enum.Font.Roboto
+Toggle.Text = "Toggle"
+Toggle.TextTransparency = 0.25
+Toggle.TextColor3 = Color3.fromRGB(248, 248, 248)
+Toggle.TextSize = 28.000
+Toggle.Draggable = false
+
+local Ui1 = Instance.new("UICorner",Toggle)
+Ui1.CornerRadius = UDim.new(0,200)
+
+local Ui2 = Instance.new("UIStroke",Toggle0)
+Ui2.Thickness = 3
+Ui2.Transparency = 0.5
+Ui2.Color = Color3.new(1,1,1)
+
+local Ui3 = Instance.new("UIStroke",Toggle1_5)
+Ui3.Thickness = 6
+Ui3.Transparency = 0.5
+Ui3.Color = Color3.new(0,0,0)
+
+local Ui4 = Instance.new("UICorner",Toggle0)
+Ui4.CornerRadius = UDim.new(0,200)
+
+local Ui5 = Instance.new("UICorner",Toggle1_5)
+Ui5.CornerRadius = UDim.new(0,200)
+
+Toggle.MouseButton1Click:connect(function()
+    keypress(Enum.KeyCode.LeftControl)
+end)
+
+local Window = Fluent:CreateWindow({
+    Title = "YOUHUB | Evade",
+    SubTitle = "v0.5",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(400, 330),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "settings" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
+}
+Tabs.Main:AddSection("🌾 Farm 🌾")
+Tabs.Main:AddToggle("AAFK",{
+        Title = "Auto AFK",	
+	Callback = function(v)
+_G.AutoAFK = v
+end})
+Tabs.Main:AddToggle("AT",{
+        Title = "Auto Ticket",	
+	Callback = function(v)
+_G.AutoTickets = v
+if value then
+local part = Instance.new("Part", workspace)
+			part.Anchored = true
+			part.CFrame = CFrame.new(100, 996, 100)
+		end
+		while task.wait(0.25) and _G.AutoTickets do
+			if not value then
+				break
+			end
+			local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+			local tickets = workspace.Game.Effects.Tickets
+			local hrp = char:WaitForChild("HumanoidRootPart", 3)
+			if hrp == nil then
+				return
+			end
+                        if _G.AutoAFK then
+			hrp.CFrame = CFrame.new(100, 1000, 100)
+                        end
+			for i, v in next, tickets:GetDescendants() do
+				if v.IsA(v, "BasePart") and v.Name == "HumanoidRootPart" then
+					hrp.CFrame = CFrame.new(v.Position)
+				end
+			end
+		end
+end})
+
+Tabs.Main:AddSection("⚜️ Life ⚜️")
+Tabs.Main:AddToggle("WOD",{
+	Name = "Walk on downed",
+        Callback = function(v)
+_G.WalkDown = v
+spawn(function()
+pcall(function()
+while _G.WalkDown do wait(1)
+if _G.WalkDown and workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):GetAttribute('Downed') then
+workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):SetAttribute('Downed', false)
+else
+if workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):GetAttribute('Downed') then
+workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):SetAttribute('Downed', true)
+end
+end
+end)
+end)
+end})
+Tabs.Main:AddToggle("AR",{
+	Name = "Auto Respawn",
+        Callback = function(v)
+_G.AutoRespawn = v
+while _G.AutoRespawn do wait(0.5)
+if workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):GetAttribute('Downed') then
+game:GetService("ReplicatedStorage").Events.Player.ChangePlayerMode:FireServer(true)
+end
+end
+end})
+Tabs.Main:AddButton({
+        Name = "Respawn",
+        Callback = function()
+game:GetService("ReplicatedStorage").Events.Player.ChangePlayerMode:FireServer(true)
+end})
+
+
+
+
+
+
+
+
+
+
+
+
