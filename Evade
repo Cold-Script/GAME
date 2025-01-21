@@ -63,7 +63,7 @@ local Window = Fluent:CreateWindow({
     Title = "YOUHUB | Evade",
     SubTitle = "v0.5",
     TabWidth = 160,
-    Size = UDim2.fromOffset(400, 330),
+    Size = UDim2.new(0,436,0,107),
     Acrylic = true,
     Theme = "Dark",
     MinimizeKey = Enum.KeyCode.LeftControl
@@ -142,9 +142,8 @@ Tabs.Main:AddButton({
 game:GetService("ReplicatedStorage").Events.Player.ChangePlayerMode:FireServer(true)
 end})
 Tabs.Main:AddSection("🔊 Ambient Sound 🔊")
-Tabs.Main:AddToggle({
+Tabs.Main:AddToggle("AW",{
 	Title = "Auto Whistle",
-	Description = "Whistle Auto",
 	Callback = function(v)
 _G.AutoWhistle = v
 while _G.AutoWhiste do wait(1)
@@ -156,14 +155,13 @@ Tabs.Main:AddSlider("FS",{
   Title = "Fly speed",
   Min = 40,
   Max = 100,
-  Rouding = 1,
+  Rounding = 1,
   Default = 40,
   Callback = function(v)
 _G.SetSpeedFly = v or 40
 end})
-Tabs.Main:AddToggle({
-	Name = "Fly",
-	Description = "Fly",
+Tabs.Main:AddToggle("F",{
+	Title = "Fly",
 	Callback=function(v)
 _G.StartFly = v
 if _G.StartFly == false then
@@ -226,7 +224,7 @@ Adornment.Parent = child
 end
 Tabs.Main:AddToggle("NE",{
 	Title = "Nextbots",
-        Callback = function(v)
+      Callback = function(v)
 _G.NextbotsESP = v
 if _G.NextbotsESP then
 local GamePlayers = workspace.Game.Players
@@ -273,7 +271,6 @@ for _,v in pairs(workspace.Game.Players:GetChildren()) do
 if not v:FindFirstChild("Players_ESP") then
 Highlight(v)
 end
-end
 end		
 else
 for i, v in pairs(workspace:GetDescendants()) do
@@ -284,6 +281,13 @@ end
 end
 end
 end})
+
+
+
+
+
+
+
 
 
 
