@@ -6,7 +6,7 @@ local TextLabel_2 = Instance.new("TextLabel")
 
 --Properties:
 BuildABoat2.ResetOnSpawn = false
-BuildABoat2.Name = "BuildABoat2"
+BuildABoat2.Name = "BuildABoatForTreasureYOUHUB"
 BuildABoat2.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 BuildABoat2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
