@@ -1,116 +1,162 @@
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+local BuildABoat2 = Instance.new("ScreenGui")
+local UI = Instance.new("Frame")
+local TextButton = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
 
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "ScreenGui"
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ResetOnSpawn = false
+--Properties:
+BuildABoat2.ResetOnSpawn = false
+BuildABoat2.Name = "BuildABoat2"
+BuildABoat2.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+BuildABoat2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local Toggle0 = Instance.new("Frame")
-Toggle0.Name = "Toggle0"
-Toggle0.Parent = ScreenGui
-Toggle0.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Toggle0.BackgroundTransparency = 0.75
-Toggle0.Position = UDim2.new(0.175, 0, -0.075, 0)
-Toggle0.Size = UDim2.new(0, 85, 0, 85)
+UI.Name = "UI"
+UI.Parent = BuildABoat2
+UI.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+UI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+UI.Position = UDim2.new(0.0213805735, 0, 0.621931195, 0)
+UI.Size = UDim2.new(0, 216, 0, 133)
 
-local Toggle1_5 = Instance.new("Frame")
-Toggle1_5.Name = "Toggle"
-Toggle1_5.Parent = Toggle0
-Toggle1_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Toggle1_5.BackgroundTransparency = 0.75
-Toggle1_5.Position = UDim2.new(0,0,0,0)
-Toggle1_5.Size = UDim2.new(0, 85, 0, 85)
+TextButton.Parent = UI
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+TextButton.Position = UDim2.new(0, 0, 0, 0)
+TextButton.Size = UDim2.new(0, 216, 0, 133)
+TextButton.Font = Enum.Font.Cartoon
+TextButton.Text = "Auto Farm"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 28.000
 
-local Toggle = Instance.new("TextButton")
-Toggle.Name = "Toggle"
-Toggle.Parent = Toggle0
-Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Toggle.BackgroundTransparency = 0.75
-Toggle.Position = UDim2.new(0, 0, 0, 0)
-Toggle.Size = UDim2.new(0, 85, 0, 85)
-Toggle.Font = Enum.Font.Roboto
-Toggle.Text = "Toggle"
-Toggle.TextTransparency = 0.25
-Toggle.TextColor3 = Color3.fromRGB(248, 248, 248)
-Toggle.TextSize = 28.000
-Toggle.Draggable = false
+TextLabel_2.Parent = UI
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(0,0,0)
+TextLabel_2.BackgroundTransparency = 0.5
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.Size = UDim2.new(0, 216, 0, 20)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "YOUHUB | Build A Boat Treasure | Auto Farm"
+TextLabel_2.TextColor3 = Color3.fromRGB(255,255,255)
+TextLabel_2.TextSize = 14.000
 
-local Ui1 = Instance.new("UICorner",Toggle)
-Ui1.CornerRadius = UDim.new(0,200)
+UI.BackgroundColor3 = Color3.new(0,0,0)
+UI.BackgroundTransparency = 0.75
 
-local Ui2 = Instance.new("UIStroke",Toggle0)
-Ui2.Thickness = 3
-Ui2.Transparency = 0.5
-Ui2.Color = Color3.new(1,1,1)
 
-local Ui3 = Instance.new("UIStroke",Toggle1_5)
-Ui3.Thickness = 6
-Ui3.Transparency = 0.5
-Ui3.Color = Color3.new(0,0,0)
+local Ui5 = Instance.new("UIStroke",UI)
+Ui5.Thickness = 7
+Ui5.Transparency = 0.7
 
-local Ui4 = Instance.new("UICorner",Toggle0)
-Ui4.CornerRadius = UDim.new(0,200)
+-- Scripts:
 
-local Ui5 = Instance.new("UICorner",Toggle1_5)
-Ui5.CornerRadius = UDim.new(0,200)
+local function OUNJ_fake_script() -- TextButton.On/Off 
+	local script = Instance.new('LocalScript', TextButton)
 
-Toggle.MouseButton1Click:connect(function()
-    keypress(Enum.KeyCode.LeftControl)
-end)
-local Window = Fluent:CreateWindow({
-    Title = "YOUHUB | Build A Boat For Treasure",
-    SubTitle = "v0.5",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = true,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl
-})
-local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "settings" }),
-    Other = Window:AddTab({ Title = "Other", Icon = "settings" })
-}
-function AutoFarm()
-tweenService, tweenInfo = game:GetService("TweenService"), TweenInfo.new(1, Enum.EasingStyle.Linear)
-tweenInfoE = TweenInfo.new(2, Enum.EasingStyle.Linear)
-AutofarmInfoS = TweenInfo.new(24, Enum.EasingStyle.Linear)
-local Tween = tweenService:Create(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), tweenInfo, {CFrame = CFrame.new(-53.3258858, 61.0841904, -168.990448, -0.999997914, 6.06681024e-05, -0.00204384234, 8.84582896e-09, 0.999559879, 0.0296659637, 0.00204474269, 0.0296659023, -0.999557793)})
-Tween:Play()
-Tween.Completed:Wait()
-local TweenS = tweenService:Create(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), AutofarmInfoS, {CFrame = CFrame.new(-60.1640434, 45.5146027, 8749.81738, -0.998283863, 0.0156156365, -0.0564399585, 6.99763136e-10, 0.963791013, 0.266658753, 0.0585603714, 0.266201138, -0.962137043)})
-TweenS:Play()
-TweenS.Completed:Wait()
-local TweenE = tweenService:Create(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), tweenInfoE, {CFrame = CFrame.new(-54.7364044, -353.343506, 9499.69141, -0.997614145, -0.057083983, 0.0388260931, 3.42698292e-09, 0.56239897, 0.826866031, -0.0690365583, 0.824893236, -0.56105715)})
-TweenE:Play()
-wait(2)
-game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-spawn(function()
-while game.Players.LocalPlayer.Character do
-wait()
-workspace.ClaimRiverResultsGold:FireServer()
-firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").BoatStages.NormalStages.TheEnd.GoldenChest.Trigger,0)
-wait(0.1)
-workspace.ClaimRiverResultsGold:FireServer()
-firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").BoatStages.NormalStages.TheEnd.GoldenChest.Trigger,1)
+	script.Parent.MouseButton1Click:Connect(function()
+		if script.Parent.BackgroundColor3 == Color3.new(0.12549, 1, 0.113725) then
+			script.Parent.BackgroundColor3 = Color3.new(0.666667, 0, 0)
+		else
+			script.Parent.BackgroundColor3 = Color3.new(0.12549, 1, 0.113725)
+		end
+	end)
 end
-end)
-end
+coroutine.wrap(OUNJ_fake_script)()
+local function GPCZMU_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
 
-Tabs.Main:AddToggle("autofarm", {
-Title = "Auto Farm", 
-Default = false,
-Callback = function(v)
-if v then
-AutoFarm()
-else
-game.Players.LocalPlayer.Character.Humanoid.Health = 0
+	getgenv().autoFarm = false
+	
+	local hum = game.Players.LocalPlayer.Character.Humanoid
+	
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		getgenv().autoFarm = not getgenv().autoFarm
+		
+	spawn(function()
+			if getgenv().autoFarm == false then
+				hum.Health = 0
+			end
+			while not hum.Health == 0 and autoFarm == true do
+						local TS = game:GetService("TweenService")
+						local location2 = CFrame.new(-61, 70.739624, 125) --288
+						local location3 = CFrame.new(-55.7065125, -360.739624, 9492.35645, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+						local location = CFrame.new(-55.7065125, 70.739624, 9492.35645, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+						local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+						local hum = game.Players.LocalPlayer.Character.Humanoid
+						local tween1 = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(3), {CFrame = location2 })
+						if hum.Health == 0 then
+							tween1:Cancel()
+						else
+							tween1:Play()
+						wait(3)
+						local tween = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(20), {CFrame = location })
+						if hum.Health == 0 then
+							tween:Cancel()
+						else
+							tween:Play()
+						wait(20)
+						local tween2 = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(3), {CFrame = location3 })
+						if hum.Health == 0 then
+							tween2:Cancel()
+						else
+							tween2:Play()
+							wait(0.1)
+							wait(8)
+							workspace.ClaimRiverResultsGold:FireServer()
+							wait(10)
+						end
+					end
+				end
+			end
+		end)
+	end)
+	
 end
-end})
+coroutine.wrap(GPCZMU_fake_script)()
+local function VZWBTQ_fake_script() -- UI.LocalScript 
+	local script = Instance.new('LocalScript', UI)
 
-game.Players.LocalPlayer.CharacterAdded:Connect(function()
-game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
-if not getgenv().autofarm then return end
-AutoFarm()
-end)
+	local dragger = {}; 
+	local resizer = {};
+	
+	do
+		local mouse = game:GetService("Players").LocalPlayer:GetMouse();
+		local inputService = game:GetService('UserInputService');
+		local heartbeat = game:GetService("RunService").Heartbeat;
+		-- // credits to Ririchi / Inori for this cute drag function :)
+		function dragger.new(frame)
+			local s, event = pcall(function()
+				return frame.MouseEnter
+			end)
+	
+			if s then
+				frame.Active = true;
+	
+				event:connect(function()
+					local input = frame.InputBegan:connect(function(key)
+						if key.UserInputType == Enum.UserInputType.MouseButton1 then
+							local objectPosition = Vector2.new(mouse.X - frame.AbsolutePosition.X, mouse.Y - frame.AbsolutePosition.Y);
+							while heartbeat:wait() and inputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+								frame:TweenPosition(UDim2.new(0, mouse.X - objectPosition.X + (frame.Size.X.Offset * frame.AnchorPoint.X), 0, mouse.Y - objectPosition.Y + (frame.Size.Y.Offset * frame.AnchorPoint.Y)), 'Out', 'Quad', 0.1, true);
+							end
+						end
+					end)
+	
+					local leave;
+					leave = frame.MouseLeave:connect(function()
+						input:disconnect();
+						leave:disconnect();
+					end)
+				end)
+			end
+		end
+	
+		function resizer.new(p, s)
+			p:GetPropertyChangedSignal('AbsoluteSize'):connect(function()
+				s.Size = UDim2.new(s.Size.X.Scale, s.Size.X.Offset, s.Size.Y.Scale, p.AbsoluteSize.Y);
+			end)
+		end
+	end
+	script.Parent.Active = true
+	script.Parent.Draggable = true
+end
+coroutine.wrap(VZWBTQ_fake_script)()
+
+
