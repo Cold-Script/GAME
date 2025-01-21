@@ -78,16 +78,21 @@ Tabs.Main:AddToggle("AAFK",{
         Title = "Auto AFK",	
 	Callback = function(v)
 _G.AutoAFK = v
-end})
-Tabs.Main:AddToggle("AT",{
-        Title = "Auto Ticket",	
-	Callback = function(v)
-_G.AutoTickets = v
 if v then
 local part = Instance.new("Part", workspace)
 			part.Anchored = true
 			part.CFrame = CFrame.new(100, 996, 100)
 		end
+while task.wait(0.25) and _G.AutoAFK do
+local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart", 3)
+hrp.CFrame = CFrame.new(100, 1000, 100)
+end
+end})
+Tabs.Main:AddToggle("AT",{
+        Title = "Auto Ticket",	
+	Callback = function(v)
+_G.AutoTickets = v
 		while task.wait(0.25) and _G.AutoTickets do
 			if not value then
 				break
@@ -98,9 +103,7 @@ local part = Instance.new("Part", workspace)
 			if hrp == nil then
 				return
 			end
-                        if _G.AutoAFK then
-			hrp.CFrame = CFrame.new(100, 1000, 100)
-                        end
+                        
 			for i, v in next, tickets:GetDescendants() do
 				if v.IsA(v, "BasePart") and v.Name == "HumanoidRootPart" then
 					hrp.CFrame = CFrame.new(v.Position)
@@ -111,25 +114,21 @@ end})
 
 Tabs.Main:AddSection("⚜️ Life ⚜️")
 Tabs.Main:AddToggle("WOD",{
-	Name = "Walk on downed",
-        Callback = function(v)
+        Title = "Walk on downed",	
+	Callback = function(v)
 _G.WalkDown = v
 spawn(function()
 pcall(function()
 while _G.WalkDown do wait(1)
 if _G.WalkDown and workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):GetAttribute('Downed') then
 workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):SetAttribute('Downed', false)
-else
-if workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):GetAttribute('Downed') then
-workspace.Game.Players:WaitForChild(game.Players.LocalPlayer.Name):SetAttribute('Downed', true)
-end
 end
 end
 end)
 end)
 end})
 Tabs.Main:AddToggle("AR",{
-	Name = "Auto Respawn",
+	Title = "Auto Respawn",
         Callback = function(v)
 _G.AutoRespawn = v
 while _G.AutoRespawn do wait(0.5)
@@ -139,10 +138,161 @@ end
 end
 end})
 Tabs.Main:AddButton({
-        Name = "Respawn",
+        Title = "Respawn",
         Callback = function()
 game:GetService("ReplicatedStorage").Events.Player.ChangePlayerMode:FireServer(true)
 end})
+Tabs.Main:AddSection("🔊 Ambient Sound 🔊")
+Tabs.Main:AddToggle({
+	Title = "Auto Whistle",
+	Description = "Whistle Auto",
+	Callback = function(v)
+_G.AutoWhistle = v
+while _G.AutoWhiste do wait(1)
+game:GetService("ReplicatedStorage").Events.Character.Whistle:FireServer(true)
+end
+end})
+Tabs.Main:AddSection("💻 Players 💻")
+Tabs.Main:AddSlider("FS",{
+  Title = "Fly speed",
+  Min = 40,
+  Max = 100,
+  Rouding = 1,
+  Default = 40,
+  Callback = function(v)
+_G.SetSpeedFly = v or 40
+end})
+Tabs.Main:AddToggle({
+	Name = "Fly",
+	Description = "Fly",
+	Callback=function(v)
+_G.StartFly = v
+if _G.StartFly == false then
+if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and game.Players.LocalPlayer.Character.Humanoid.RootPart and game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("VelocityHandler") and game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GyroHandler") then
+game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler:Destroy()
+game.Players.LocalPlayer.Character.HumanoidRootPart.GyroHandler:Destroy()
+game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+end
+end
+while _G.StartFly do
+if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and game.Players.LocalPlayer.Character.Humanoid.RootPart and game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("VelocityHandler") and game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GyroHandler") then
+game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler.MaxForce = Vector3.new(9e9,9e9,9e9)
+game.Players.LocalPlayer.Character.HumanoidRootPart.GyroHandler.MaxTorque = Vector3.new(9e9,9e9,9e9)
+game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
+game.Players.LocalPlayer.Character.HumanoidRootPart.GyroHandler.CFrame = Workspace.CurrentCamera.CoordinateFrame
+game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler.Velocity = Vector3.new()
+if require(game.Players.LocalPlayer.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule")):GetMoveVector().X > 0 then
+game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler.Velocity + game.Workspace.CurrentCamera.CFrame.RightVector * (require(game.Players.LocalPlayer.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule")):GetMoveVector().X * _G.SetSpeedFly)
+end
+if require(game.Players.LocalPlayer.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule")):GetMoveVector().X < 0 then
+game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler.Velocity + game.Workspace.CurrentCamera.CFrame.RightVector * (require(game.Players.LocalPlayer.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule")):GetMoveVector().X * _G.SetSpeedFly)
+end
+if require(game.Players.LocalPlayer.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule")):GetMoveVector().Z > 0 then
+game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler.Velocity - game.Workspace.CurrentCamera.CFrame.LookVector * (require(game.Players.LocalPlayer.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule")):GetMoveVector().Z * _G.SetSpeedFly)
+end
+if require(game.Players.LocalPlayer.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule")):GetMoveVector().Z < 0 then
+game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.VelocityHandler.Velocity - game.Workspace.CurrentCamera.CFrame.LookVector * (require(game.Players.LocalPlayer.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule")):GetMoveVector().Z * _G.SetSpeedFly)
+end
+elseif game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and game.Players.LocalPlayer.Character.Humanoid.RootPart and game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("VelocityHandler") == nil and game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GyroHandler") == nil then
+local bv = Instance.new("BodyVelocity")
+local bg = Instance.new("BodyGyro")
+
+bv.Name = "VelocityHandler"
+bv.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+bv.MaxForce = Vector3.new(0,0,0)
+bv.Velocity = Vector3.new(0,0,0)
+
+bg.Name = "GyroHandler"
+bg.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+bg.MaxTorque = Vector3.new(0,0,0)
+bg.P = 1000
+bg.D = 50
+end
+task.wait()
+end
+end})
+Tabs.Main:AddSection("🌐 ESP 🌐")
+local function Cylinder(child, title)
+local Adornment = Instance.new("CylinderHandleAdornment")
+Adornment.Height = child.Size.Y * 2
+Adornment.Radius = child.Size.X * 2
+Adornment.CFrame = CFrame.new(0,0,0) * CFrame.Angles(math.rad(90), 0, 0)
+Adornment.Color3 = Color3.fromRGB(255, 0, 0)
+Adornment.Transparency = 0.5
+Adornment.AlwaysOnTop = true
+Adornment.ZIndex = 10
+Adornment.Adornee = child
+Adornment.Name = title
+Adornment.Parent = child
+end
+Tabs.Main:AddToggle("NE",{
+	Title = "Nextbots",
+        Callback = function(v)
+_G.NextbotsESP = v
+if _G.NextbotsESP then
+local GamePlayers = workspace.Game.Players
+for i, v in pairs(GamePlayers:GetChildren()) do
+if not game.Players:FindFirstChild(v.Name) and not v.HumanoidRootPart:FindFirstChild("Nextbots_ESP") then
+Cylinder(v.HumanoidRootPart, "Nextbots_ESP")
+end
+end
+NE = workspace.Game.Players.ChildAdded:Connect(function()
+local GamePlayers = workspace.Game.Players
+for i, v in pairs(GamePlayers:GetChildren()) do
+if not game.Players:FindFirstChild(v.Name) and not v.HumanoidRootPart:FindFirstChild("Nextbots_ESP") then
+Cylinder(v.HumanoidRootPart, "Nextbots_ESP")
+end
+end
+end)
+else
+NE:Disconnect()
+for i, v in pairs(workspace:GetDescendants()) do
+if v.Name == "Nextbots_ESP" then
+v:Destroy()
+end
+end
+end
+end})
+local function Highlight(child)
+if not child:FindFirstChild("Players_ESP") then
+local Highlight = Instance.new('Highlight', child)
+Highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+Highlight.FillColor = Color3.fromRGB(0, 255, 0)
+Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+Highlight.FillTransparency = 0.75
+Highlight.OutlineTransparency = 0
+Highlight.Name = "Players_ESP"
+end
+end
+Tabs.Main:AddToggle("PE",{
+	Title = "Players ESP",
+	Callback = function(v)
+_G.PlayersESP = v
+while wait(1) do
+if _G.PlayersESP then
+for _,v in pairs(workspace.Game.Players:GetChildren()) do
+if not v:FindFirstChild("Players_ESP") then
+Highlight(v)
+end
+end
+end		
+else
+for i, v in pairs(workspace:GetDescendants()) do
+if v.Name == "Players_ESP" then
+v:Destroy()
+end
+end
+end
+end
+end})
+
+
+
+
+
+
+
+
 
 
 
