@@ -14,7 +14,7 @@ UI.Name = "UI"
 UI.Parent = BuildABoat2
 UI.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
 UI.BorderColor3 = Color3.fromRGB(0, 0, 0)
-UI.Position = UDim2.new(0.0213805735, 0, 0.621931195, 0)
+UI.Position = UDim2.new(0.0213805735, 0, 0, 0)
 UI.Size = UDim2.new(0, 216, 0, 133)
 
 TextButton.Parent = UI
@@ -73,7 +73,7 @@ local function GPCZMU_fake_script() -- TextButton.LocalScript
 			if getgenv().autoFarm == false then
 				hum.Health = 0
 			end
-			while not hum.Health == 0 and autoFarm == true do
+			while autoFarm == true do
 						local TS = game:GetService("TweenService")
 						local location2 = CFrame.new(-61, 70.739624, 125) --288
 						local location3 = CFrame.new(-55.7065125, -360.739624, 9492.35645, 0, 0, -1, 0, 1, 0, 1, 0, 0)
