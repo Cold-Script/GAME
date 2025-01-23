@@ -245,12 +245,6 @@ local args = {
     [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
-function HitboxEventNewYear2025()
-workspace.Tower["Titan Presentwoman"].HumanoidRootPart.CanCollide = true
-wait(0.5)
-workspace.Tower["Titan Presentwoman"].HumanoidRootPart.CanCollide = false
-end
-HitboxEventNewYear2025()
 end
 end})
 Tabs.Event:AddSection("❄️ Chirstmas 2025 ❄️")
@@ -270,6 +264,54 @@ local args = {
     [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end})
+Tabs.Event:AddSection("🎃 Halloween 2025 🎃")
+Tabs.Event:AddDropdown("EventHalloween2025", {
+        Title = "Select Unit",
+        Values = {"Scary Speakerman","Monter Speakerman","Pumpkin Farmer","Sinister Cameraman","Corrupted Cameraman"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitHalloween2025 = v
+end})
+Tabs.Event:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+if getgenv().UnitHalloween2025 == "Scary Speakerman" then
+local args = {
+    [1] = "ScarySpeakerman",
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
+if getgenv().UnitHalloween2025 == "Monter Speakerman" then
+local args = {
+    [1] = "MonterSpeakerman",
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
+if getgenv().UnitHalloween2025 == "Pumpkin Farmer" then
+local args = {
+    [1] = "PumpkinFarmer",
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
+if getgenv().UnitHalloween2025 == "Sinister Cameraman" then
+local args = {
+    [1] = "SinisterCameraman",
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
+if getgenv().UnitHalloween2025 == "Corrupted Cameraman" then
+local args = {
+    [1] = "CorruptedCameraman",
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
 end})
 
 Tabs.Other:AddSection("Players")
@@ -295,18 +337,6 @@ Tabs.Other:AddSlider("HipHeight", {
         getgenv().HipHeight = v
         game:GetService("RunService").RenderStepped:Connect(function()
         game.Players.LocalPlayer.Character.Humanoid.HipHeight = getgenv().HipHeight
-        end)
-end})
-Tabs.Other:AddSlider("HipHeight", {
-        Title = "JumpPower",
-        Default = 50,
-        Min = 50,
-        Max = 150,
-        Rounding = 2,
-        Callback = function(v)
-        getgenv().JumpPower = v
-        game:GetService("RunService").RenderStepped:Connect(function()
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = getgenv().JumpPower
         end)
 end})
 Tabs.Other:AddButton({
