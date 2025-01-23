@@ -75,6 +75,7 @@ local Tabs = {
     Epic = Window:AddTab({ Title = "Epic", Icon = "settings" }),
     Legendary = Window:AddTab({ Title = "Legendary", Icon = "settings" }),
     Mythical = Window:AddTab({ Title = "Mythical", Icon = "settings" }),
+    Godly = Window:AddTab({ Title = "Godly", Icon = "settings" }),
     Exclusive = Window:AddTab({ Title = "Exclusive", Icon = "settings" }),
     Event = Window:AddTab({ Title = "Event", Icon = "settings" }),
     Other = Window:AddTab({ Title = "Other", Icon = "settings" })
@@ -196,6 +197,25 @@ local args = {
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
 end})
 
+Tabs.Mythical:AddDropdown("Godly", {
+        Title = "Select Unit",
+        Values = {"Upgraded Titan TV Man"},
+        Multi = false,
+        Default = "",
+        Callback = function(v)
+getgenv().UnitGodly = v
+end})
+Tabs.Mythical:AddButton({
+        Title = "Summon Unit",
+        Callback = function()
+game.Players.LocalPlayer.Character.Humanoid.Jump = true
+wait(0.3)
+local args = {
+    [1] = getgenv().UnitGodly,
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end})
 
 Tabs.Exclusive:AddDropdown("Exclusive", {
         Title = "Select Unit",
