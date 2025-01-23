@@ -197,7 +197,7 @@ local args = {
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
 end})
 
-Tabs.Mythical:AddDropdown("Godly", {
+Tabs.Godly:AddDropdown("Godly", {
         Title = "Select Unit",
         Values = {"Upgraded Titan TV Man"},
         Multi = false,
@@ -205,7 +205,7 @@ Tabs.Mythical:AddDropdown("Godly", {
         Callback = function(v)
 getgenv().UnitGodly = v
 end})
-Tabs.Mythical:AddButton({
+Tabs.Godly:AddButton({
         Title = "Summon Unit",
         Callback = function()
 game.Players.LocalPlayer.Character.Humanoid.Jump = true
