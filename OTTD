@@ -264,7 +264,7 @@ end})
 
 Tabs.Exclusive:AddDropdown("Exclusive", {
         Title = "Select Unit",
-        Values = {"Scientist Cameraman","Large Scientist Cameraman","Engineer Cameraman","Jetpack Cameraman ","Mace Cameraman","TV Woman","Green Laser Cameraman","Shield Cameraman","Titan Cameraman"},
+        Values = {"Scientist Cameraman","Large Scientist Cameraman","Engineer Cameraman","Jetpack Cameraman ","Mace Cameraman","TV Woman","Green Laser Cameraman","Shield Cameraman","Titan Cameraman "},
         Multi = false,
         Default = "",
         Callback = function(v)
@@ -279,8 +279,19 @@ local args = {
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
 if getgenv().UnitExclus == "Jetpack Cameraman " then
+game.Players.LocalPlayer.Character.Humanoid.Jump = true
+wait(0.3)
 local args = {
     [1] = "Jetpack Cameraman",
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
+if getgenv().UnitExclus == "Titan Cameraman " then
+game.Players.LocalPlayer.Character.Humanoid.Jump = true
+wait(0.5)
+local args = {
+    [1] = "Titan Cameraman",
     [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
@@ -469,5 +480,20 @@ game.Lighting.ClockTime = 12
 end
 end)
 end})
-
-
+Tabs.Other:AddToggle("RemovalSky", {
+Title = "Removal Sky", 
+Default = false,
+Callback = function(v)
+getgenv().RemovalSky = v
+game:GetService("RunService").RenderStepped:Connect(function()
+if getgenv().RemovalSky then
+game.Lighting.Sky.Enabled = getgenv().RemovalSky
+end
+end)
+end})
+Tabs.Other:AddSection("Unit")
+Tabs.Other:AddToggle("ShieldFix", {
+Title = "Fix Shield", 
+Default = false,
+Callback = function(v)
+end})
