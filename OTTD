@@ -499,7 +499,7 @@ Callback = function(v)
 if v then
 for _,v in pairs(workspace:GetDescendants()) do
 if v.Name == "ShieldCameraman5" then
-v.LVL5["shield LVL5"].Material == "ForceField"
+v.LVL5["shield LVL5"].Material = "ForceField"
 v.LVL4["shield LVL4"].Transparency = 1
 v.LVL3["shield LVL3"].Transparency = 1
 v.LVL1["shield LVL1"].Transparency = 1
@@ -508,7 +508,7 @@ end
 ShieldFix = workspace.Towers.ShieldCameraman5.ChildAdded:Connect(function()
 for _,v in pairs(workspace:GetDescendants()) do
 if v.Name == "ShieldCameraman5" then
-v.LVL5["shield LVL5"].Material == "ForceField"
+v.LVL5["shield LVL5"].Material = "ForceField"
 v.LVL4["shield LVL4"].Transparency = 1
 v.LVL3["shield LVL3"].Transparency = 1
 v.LVL1["shield LVL1"].Transparency = 1
@@ -519,7 +519,7 @@ else
 ShieldFix:Disconnect()
 for _,v in pairs(workspace:GetDescendants()) do
 if v.Name == "ShieldCameraman5" then
-v.LVL5["shield LVL5"].Material == "Neon"
+v.LVL5["shield LVL5"].Material = "Neon"
 v.LVL4["shield LVL4"].Transparency = 0
 v.LVL3["shield LVL3"].Transparency = 0
 v.LVL1["shield LVL1"].Transparency = 0
