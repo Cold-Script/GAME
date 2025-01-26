@@ -264,7 +264,7 @@ end})
 
 Tabs.Exclusive:AddDropdown("Exclusive", {
         Title = "Select Unit",
-        Values = {"Scientist Cameraman","Large Scientist Cameraman","Engineer Cameraman","Jetpack Cameraman ","Mace Cameraman","TV Woman","Green Laser Cameraman","Shield Cameraman","Titan Cameraman "},
+        Values = {"Scientist Cameraman","Large Scientist Cameraman","Engineer Cameraman","Spider Cameraman","Spider Speakerman","Spider TV Man","Jetpack Cameraman ","Mace Cameraman","TV Woman","Green Laser Cameraman","Shield Cameraman","Titan Cameraman "},
         Multi = false,
         Default = "",
         Callback = function(v)
@@ -278,6 +278,27 @@ local args = {
     [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+if getgenv().UnitExclus == "Spider Cameraman" then
+local args = {
+    [1] = "SpiderCamera",
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
+if getgenv().UnitExclus == "Spider Speakerman" then
+local args = {
+    [1] = "SpiderSpeaker",
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
+if getgenv().UnitExclus == "Spider TV Man" then
+local args = {
+    [1] = "SpiderTV",
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.Angles(-0, 0, -0)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ChangeMode"):InvokeServer(unpack(args))
+end
 if getgenv().UnitExclus == "Jetpack Cameraman " then
 game.Players.LocalPlayer.Character.Humanoid.Jump = true
 wait(0.3)
